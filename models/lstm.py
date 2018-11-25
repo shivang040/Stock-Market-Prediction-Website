@@ -8,14 +8,14 @@ import datetime as dt
 import urllib.request
 import json
 import os
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
 
 class LSTM_Model:
-    
+
     @classmethod
-    def LSTM_Pred(self,tick):
+    def LSTM_Pred(self, tick):
 
         data_source = 'alphavantage'
 
@@ -71,10 +71,11 @@ class LSTM_Model:
 
         df.drop("Date", axis=1, inplace=True)
 
-        scaler = StandardScaler()
-        scaler.fit(df)
+        df1 = df
+        df = df.values
 
-        df = scaler.transform(df)
+        scaler = MinMaxScaler()
+        df = scaler.fit_transform(df)
 
         def build_model(layers):
             model = Sequential()
@@ -125,6 +126,10 @@ class LSTM_Model:
         window = 5
         X_train, y_train, X_test, y_test = load_data(df, window)
 
+        x_latest = df[-5:]
+
+        x_latest = np.reshape(x_latest, (1, x_latest.shape[0], window))
+
         model = build_model([5, window, 1])
 
         model.fit(
@@ -135,20 +140,45 @@ class LSTM_Model:
             validation_split=0.1,
             verbose=1)
 
-        # trainScore = model.evaluate(X_train, y_train, verbose=0)
-
-        # accuracy_train = (1 - trainScore) * 100
+        trainScore = model.evaluate(X_train, y_train, verbose=0)
 
         # Predictions
 
         p = model.predict(X_test)
 
-        # mse = mean_squared_error(y_test, p)
+        mse = mean_squared_error(y_test, p)
 
-        # accuracy_test = (1 - mse) * 100
-
-        # in case want to display accuracy use
-        # return(p, y_test, accuracy_train, accuracy_test)
         p = np.reshape(p, p.shape[0]).tolist()
         y_test = np.reshape(y_test, y_test.shape[0]).tolist()
-        return (p, y_test)
+
+        p_latest = model.predict(x_latest)
+        p.append(p_latest[0, 0])
+
+        def inverse_minmax(x, maxval, minval):
+            return (x * (maxval - minval) + minval)
+
+        maxval = max(df1['Mid Prices'])
+        minval = min(df1['Mid Prices'])
+
+        p = [inverse_minmax(y, maxval, minval) for y in p]
+        y_test = [inverse_minmax(y, maxval, minval) for y in y_test]
+
+        def delete_stock_data(file_name):
+            if os.path.exists(file_name):
+                os.remove(file_name)
+                print("File removed successfully")
+            else:
+                print("The file does not exist")
+
+        delete_stock_data(file_name)
+
+        return (p, y_test, p[-1], mse)
+
+
+# ob = LSTM_Model()
+# p, y, tomorrow, mse = ob.LSTM_Pred("TCS")
+
+# print("Predictions->", p)
+# print()
+# print("Tomorrow prediction-> ", tomorrow)
+# print("MSE->", mse)
