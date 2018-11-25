@@ -2,7 +2,7 @@
 A Website where users can input company stock ticker and view the predicted stock results.
 
 ## To run the website
-###### Go into the main directory and type following
+###### Go into the main directory and type following command in the cmd terminal
 > python app.py
 
 **After running command, the site will run on [localhost:5000](http://127.0.0.1:5000/)**
