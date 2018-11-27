@@ -17,24 +17,35 @@ body {
     border-top: 16px solid #3498db;
     width: 120px;
     height: 120px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
     animation: spin 2s linear infinite;
     position: fixed;
     top: 50%;
     left: 50%;
     z-index: 9999;
-  }
+}
 
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .contain {
     min-height: 100%;
@@ -73,13 +84,11 @@ label {
     padding-bottom: 60px;
 }
 
-.graphs {
+.details {
     padding-bottom: 60px;
+    text-align: center;
 }
 
-.graph1 {
-    margin: 40px;
-}
 
 #comp {
     margin-bottom: 20px;
@@ -90,10 +99,5 @@ label {
 }
 
 #myChart1 {
-   width: 80%;
-   text-align:center;
-}
-
-canvas {
-   display: inline;
+    margin: 0 auto;
 }

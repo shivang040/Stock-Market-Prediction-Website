@@ -1,0 +1,5 @@
+#Ignore All .csv files
+*.csv
+
+#Ignore vscode folder
+.vscode/
