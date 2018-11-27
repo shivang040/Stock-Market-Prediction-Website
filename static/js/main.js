@@ -34,7 +34,7 @@ $(document).ready(function () {
         });
         if (err) {
             document.querySelector('.details').innerHTML = '<span style="margin-right:10%"><h4 style="display: inline-block;margin-right: 30px;color: limegreen;">Tomorrow\'s Prediction </h4>' + tomm_pred + '</span>' +
-             '<span><h4 style="display: inline-block;margin-right: 30px;color: limegreen;">Mean Square Error</h4>' + mse + '</span>';
+             '<span><h4 style="display: inline-block;margin-right: 30px;color: limegreen;">Error</h4>' + mse + '</span>';
             var ctx = $("#myChart1");
             var myChart = new Chart(ctx, {
                 type: 'line',

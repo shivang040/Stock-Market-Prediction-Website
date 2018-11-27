@@ -13,17 +13,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/main.js')}}"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="../static/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
 </head>
 
 <body>
     <div class="loader">
     </div>
     <div class="contain">
+        <div class="container">
         <div class="jumbotron">
             <img src="../static/bot.png" alt="bot image" id="image" />
             <h1 class="display-4">Stock Market Prediction Bot</h1>
             <p class="lead">A bot which will predict stock prices based on previous stock prices patterns.</p>
             <hr class="my-4">
+        </div>
         </div>
         <div class="input">
             <label for="comp">Enter Company Ticker</label>

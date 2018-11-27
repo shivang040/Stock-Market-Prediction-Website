@@ -50,6 +50,7 @@ body {
 .contain {
     min-height: 100%;
     position: relative;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .foot {
@@ -60,7 +61,7 @@ body {
     bottom: 0;
     color: white;
     text-align: center;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     height: 50px;
 }
@@ -82,11 +83,13 @@ label {
 .input {
     text-align: center;
     padding-bottom: 60px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .details {
     padding-bottom: 60px;
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -100,4 +103,5 @@ label {
 
 #myChart1 {
     margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
 }

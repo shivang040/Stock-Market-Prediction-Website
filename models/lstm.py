@@ -136,7 +136,7 @@ class LSTM_Model:
             X_train,
             y_train,
             batch_size=512,
-            epochs=15,
+            epochs=20,
             validation_split=0.1,
             verbose=1)
 
@@ -171,8 +171,11 @@ class LSTM_Model:
                 print("The file does not exist")
 
         delete_stock_data(file_name)
-
-        return (p, y_test, p[-1], mse)
+        from math import sqrt
+        mse = mean_squared_error(y_test, p[:-1])
+        rmse = sqrt(mse)
+        print (rmse)
+        return (p, y_test, p[-1], rmse)
 
 
 # ob = LSTM_Model()
